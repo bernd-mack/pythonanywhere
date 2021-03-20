@@ -13,6 +13,7 @@ from datetime import datetime
 masternodes = pd.read_json('http://defichain-node.de/api/v1/listmasternodes/').transpose()
 masternodes['Address'] = masternodes['ownerAuthAddress']
 masternodes = masternodes[['ownerAuthAddress', 'Address', 'state', 'mintedBlocks']]
+
 cakenodes = pd.read_json('https://poolapi.cakedefi.com/nodes?order=status&orderBy=DESC')
 cakenodes = cakenodes[cakenodes['coin'] == "DeFi"]
 cakenodes = cakenodes[['address']]
