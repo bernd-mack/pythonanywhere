@@ -67,7 +67,6 @@ app.layout = html.Div([
     #    html.Div(id='choromap-container')
     html.Div([
         html.P(f'Query-Time: {querytime}'),
-        html.P(f'Query-Time: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
     ]),
     html.Div(
         dcc.Graph(
