@@ -66,7 +66,8 @@ app.layout = html.Div([
     #    html.Div(id='bar-container'),
     #    html.Div(id='choromap-container')
     html.Div([
-        html.P(f'Query-Time: {querytime}')
+        html.P(f'Query-Time: {querytime}'),
+        html.P(f'Query-Time: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
     ]),
     html.Div(
         dcc.Graph(
@@ -76,7 +77,9 @@ app.layout = html.Div([
                     {'values': [len(masternodes_enabled[masternodes_enabled['Owner'] == "Cakedefi"]),
                                 len(masternodes_enabled[masternodes_enabled['Owner'] != "Cakedefi"])],
                      'labels': ["Cakedefi", "Others"],
-                     'type': 'pie', }
+                     'type': 'pie',
+                      'pull': [0.0, 0.1]
+                     }
                 ],
             }
         )
