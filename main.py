@@ -24,6 +24,8 @@ masternodes = masternodes.fillna({'Owner': "Other"})
 masternodes_enabled = masternodes[masternodes['state'] == "ENABLED"]
 querytime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+df = pd.read_json('assets/listmasternodeshistory.json')
+
 # -------------------------------------------------------------------------------------
 # App layout
 app = dash.Dash(__name__, prevent_initial_callbacks=True)  # this was introduced in Dash version 1.12.0
@@ -82,8 +84,28 @@ app.layout = html.Div([
                 ],
             }
         )
+    ),
+    html.Div(
+        dcc.Graph(id='my-graph', figure=
+            px.line(data_frame=df.cumsum())
+                  , clickData=None, hoverData=None,
+              # I assigned None for tutorial purposes. By defualt, these are None, unless you specify otherwise.
+              config={
+                  'staticPlot': False,  # True, False
+                  'scrollZoom': True,  # True, False
+                  'doubleClick': 'reset',  # 'reset', 'autosize' or 'reset+autosize', False
+                  'showTips': False,  # True, False
+                  'displayModeBar': True,  # True, False, 'hover'
+                  'watermark': True,
+                  # 'modeBarButtonsToRemove': ['pan2d','select2d'],
+              },
+              className='six columns'
+        )
     )
 ])
+
+
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
