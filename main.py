@@ -12,7 +12,7 @@ from datetime import datetime
 # Import the cleaned data (importing csv into pandas)
 masternodes = pd.read_json('http://defichain-node.de/api/v1/listmasternodes/').transpose()
 masternodes['Address'] = masternodes['ownerAuthAddress']
-masternodes = masternodes[['ownerAuthAddress', 'Address', 'creationHeight','resignHeight' ,'state', 'mintedBlocks']]
+masternodes = masternodes[['ownerAuthAddress', 'Address', 'creationHeight','resignHeight' ,'state', 'mintedBlocks','targetMultiplier']]
 
 cakenodes = pd.read_json('https://poolapi.cakedefi.com/nodes?order=status&orderBy=DESC')
 cakenodes = cakenodes[cakenodes['coin'] == "DeFi"]
@@ -24,7 +24,7 @@ masternodes = masternodes.fillna({'Owner': "Other"})
 masternodes_enabled = masternodes[masternodes['state'] == "ENABLED"]
 querytime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-df = pd.read_json('assets/listmasternodeshistory.json')
+df = pd.read_json('./assets/listmasternodeshistory.json')
 
 # -------------------------------------------------------------------------------------
 # App layout
